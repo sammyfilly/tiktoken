@@ -110,8 +110,7 @@ def bpe_encode(
     if visualise:
         print()
 
-    tokens = [mergeable_ranks[part] for part in parts]
-    return tokens
+    return [mergeable_ranks[part] for part in parts]
 
 
 def bpe_train(
@@ -120,10 +119,7 @@ def bpe_train(
     # First, add tokens for each individual byte value
     if vocab_size < 2**8:
         raise ValueError("vocab_size must be at least 256, so we can encode all bytes")
-    ranks = {}
-    for i in range(2**8):
-        ranks[bytes([i])] = i
-
+    ranks = {bytes([i]): i for i in range(2**8)}
     # Splinter up our data into lists of bytes
     # data = "Hello world"
     # words = [
