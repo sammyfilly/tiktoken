@@ -48,7 +48,7 @@ def read_file_cached(blobpath: str) -> bytes:
     contents = read_file(blobpath)
 
     os.makedirs(cache_dir, exist_ok=True)
-    tmp_filename = cache_path + "." + str(uuid.uuid4()) + ".tmp"
+    tmp_filename = f"{cache_path}.{str(uuid.uuid4())}.tmp"
     with open(tmp_filename, "wb") as f:
         f.write(contents)
     os.rename(tmp_filename, cache_path)
